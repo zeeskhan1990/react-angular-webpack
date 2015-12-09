@@ -1,0 +1,7 @@
+{
+  "generator-react-webpack": {
+    "appName": "omsapp",
+    "style": "less",
+    "postcss": false
+  }
+}
