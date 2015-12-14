@@ -10,21 +10,32 @@ var baseConfig = require('./base');
 var BowerWebpackPlugin = require('bower-webpack-plugin');
 var config = _.merge({
   context:srcPath,
-  entry: [
+  entry: {
+    app:[
     'webpack-dev-server/client?http://127.0.0.1:8000',
     'webpack/hot/only-dev-server',
     './time-logger-app.js'
   ],
+    app2:'./time-logger-app-2.js',
+    common:['jquery','angular','bootstrap']
+  },
   cache: true,
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new BowerWebpackPlugin({
       searchResolveModulesDirectories: false
     }),
-	new NgAnnotatePlugin({add: true}),
-    new webpack.optimize.CommonsChunkPlugin('commonsource.js')
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    }),
+	  new NgAnnotatePlugin({add: true}),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "common",
+      minChunks: 2
+    })
   ]
 }, baseConfig);
 

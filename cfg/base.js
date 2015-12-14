@@ -8,7 +8,8 @@ module.exports = {
   debug: true,
   output: {
     path: path.join(__dirname, '/../dist/assets'),
-    filename: 'app.js',
+    filename: '[name].bundle.js',
+    chunkFilename: "[id].chunk.js",
     publicPath: publicPath
   },
   devServer: {
@@ -22,6 +23,7 @@ module.exports = {
   resolve: {
 	// you can now require('file') instead of require('file.js')
     extensions: ['', '.js', '.jsx'],
+    modulesDirectories:['node_modules','bower_components'],
     alias: {
       components: srcPath + '/components/',
       styles: srcPath + '/styles/',
@@ -65,11 +67,12 @@ module.exports = {
 		  test: /\.html$/,
 		  loader: 'raw'
 	  }
-    ],
+    ]
+    /*,
   externals: {
     'angular': true,
     'angular-route': '"ngRoute"',
     'moment': true
-  }
+  }*/
   }
 };
